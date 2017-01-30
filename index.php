@@ -10,10 +10,12 @@ echo  "--------------------------------------- \n"
 	. "GAME SEDERHANA, GUNTING | BATU | KERTAS \n"
 	. "--------------------------------------- \n"
 	. "     SILAHKAN PILIH MODE PERMAINAN \n"
-	. "--------------------------------------- \n";
-echo  "   1. SINGLE PLAYER  2. MULTIPLAYER \n"
+	. "--------------------------------------- \n"
+	. "   1. SINGLE PLAYER  2. MULTIPLAYER \n"
 	. "--------------------------------------- \n";
 
+$p1 = new Player;
+$p2 = new Player;
 $game = new Game;
 echo "Pilih Mode : ";
 $mode = fopen("php://stdin", "r");
@@ -22,44 +24,40 @@ $game->pilihMode(trim($mode));
 
 if ($game->pilihMode(trim($mode)) == 1) {
 	//Player 1
-	$p1 = new Player;
-	$p1->garis();
+
 	echo "PLAYER 1 : ";
 	$nama = fopen("php://stdin", "r");
 	$nama = fgets($nama);
-	$p1->garis();
 	$p1->setPlayer(trim($nama));
-	$p1->setGame();
-	$p1->tampilGame();
-	$p1->garis();
+	$game->tampilGame();
+
 	echo "Pilih Angka : ";
 	$pilih = fopen("php://stdin", "r");
 	$pilih = fgets($pilih);
 	$p1->setPilihan(trim($pilih));
-	$p1->tampilPilihan();
+	$p1->getPilihan();
 
 	//Player CPU
 	$cpu = new Player;
 	$cpu->setPlayer('CPU');
-	$cpu->setGame();
-	$cpu->playerCpu();
-	$cpu->tampilPilihan();
-	$cpu->garis();
+	$game->tampilGame();
+	$cpu->playerCpu($game);
+	$cpu->getPilihan();
 
-	$hasil = new cekSkor($p1->tampilPilihan(), $cpu->tampilPilihan());
+	$hasil = new cekSkor($p1->getPilihan(), $cpu->getPilihan());
 	$hasil->cekHasil();
 } else {
 	//Player 1
 	$p1 = new Player;
-	$p1->garis();
+
 	echo "PLAYER 1 : ";
 	$nama = fopen("php://stdin", "r");
 	$nama = fgets($nama);
-	$p1->garis();
+
 	$p1->setPlayer(trim($nama));
 	$p1->setGame();
 	$p1->tampilGame();
-	$p1->garis();
+
 	echo "Pilih Angka : ";
 	$pilih = fopen("php://stdin", "r");
 	$pilih = fgets($pilih);
@@ -68,21 +66,21 @@ if ($game->pilihMode(trim($mode)) == 1) {
 
 	//Player 2
 	$p2 = new Player;
-	$p2->garis();
+
 	echo "PLAYER 2 : ";
 	$nama = fopen("php://stdin", "r");
 	$nama = fgets($nama);
-	$p2->garis();
+
 	$p2->setPlayer(trim($nama));
 	$p2->setGame();
 	$p2->tampilGame();
-	$p2->garis();
+
 	echo "Pilih Angka : ";
 	$pilih = fopen("php://stdin", "r");
 	$pilih = fgets($pilih);
 	$p2->setPilihan(trim($pilih));
 	$p2->tampilPilihan();
-	$p2->garis();
+
 
 	$hasil = new cekSkor($p1->tampilPilihan(), $p2->tampilPilihan());
 	$hasil->cekHasil();

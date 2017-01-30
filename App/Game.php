@@ -40,4 +40,12 @@ class Game
 			}
 		}
 	}
+
+	public function tampilGame()
+	{
+		$no = 1;
+		foreach ($this->gbk as $val) {
+			echo $no++ . ". " . $val['action'] . "\n";
+		}
+	}
 }

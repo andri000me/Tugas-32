@@ -19,19 +19,6 @@ class Player extends Game
 		return $this->nama;
 	}
 
-	public function setGame()
-	{
-		$this->game = new Game();
-	}
-
-	public function tampilGame()
-	{
-		$no = 1;
-		foreach ($this->game->gbk as $val) {
-			echo $no++ . ". " . $val['action'] . "\n";
-		}
-	}
-
 	public function setPilihan($pilih)
 	{
 		$this->pilih = $pilih;
@@ -54,11 +41,14 @@ class Player extends Game
 		}
 	}
 
-	public function playerCpu()
+	public function playerCpu($game)
 	{
-		foreach ($this->game->gbk as $value) {
-			$this->pilih = shuffle($value);
+		$this->game = $game;
+		foreach ($this->game as $value) {
+			return $this->pilih = shuffle($this->game);
 		}
+
+		print_r($this->game);
 
 		if (isset($this->pilih)) {
 			switch (true) {
@@ -75,7 +65,7 @@ class Player extends Game
 		}
 	}
 
-	public function tampilPilihan()
+	public function getPilihan()
 	{
 		$this->pilihan = [
 			'nama'		=>	$this->getPlayer(),
